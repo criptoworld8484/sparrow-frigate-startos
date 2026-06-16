@@ -25,7 +25,7 @@ export const manifest = setupManifest({
           dockerfile: 'Dockerfile',
           workdir: '.',
           buildArgs: {
-            FRIGATE_VERSION: '1.5.7',
+            FRIGATE_VERSION: '1.5.3',
           },
         },
       },

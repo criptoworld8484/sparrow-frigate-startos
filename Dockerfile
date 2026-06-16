@@ -1,6 +1,6 @@
 FROM debian:12-slim
 
-ARG FRIGATE_VERSION=1.5.7
+ARG FRIGATE_VERSION=1.5.3
 ARG TARGETARCH
 
 RUN apt-get update \
