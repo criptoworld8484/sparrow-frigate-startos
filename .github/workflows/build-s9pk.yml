@@ -3,6 +3,7 @@ name: Build s9pk
 on:
   workflow_dispatch:
   push:
+    branches: [master]
     tags:
       - 'v*'
 
