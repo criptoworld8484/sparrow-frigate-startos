@@ -11,8 +11,10 @@ The service uses the **native StartOS dashboard** (Status, Health Checks, Servic
 
 ## Sideload install
 
-1. Download `frigate_x86_64.s9pk` or `frigate_aarch64.s9pk` from [GitHub Releases](https://github.com/criptoworld8484/sparrow-frigate-startos/releases).
-2. StartOS → **Sideload** → upload the `.s9pk`.
+1. Download from [GitHub Release v1.6.0](https://github.com/criptoworld8484/sparrow-frigate-startos/releases/tag/v1.6.0):
+   - `frigate_x86_64.s9pk` — servidores x86_64
+   - `frigate_aarch64.s9pk` — ARM (Raspberry Pi, etc.)
+2. StartOS → **Sideload** → sube el `.s9pk`.
 3. Open the Frigate dashboard and wait for green health checks.
 
 ## Build from source
