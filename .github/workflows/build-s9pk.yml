@@ -1,0 +1,68 @@
+name: Build s9pk
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch: [x86_64, aarch64]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install build tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y squashfs-tools jq podman uidmap
+          curl -fsSL https://start9.com/start-cli/install.sh | sh
+          echo "$HOME/.start9/bin" >> "$GITHUB_PATH"
+
+      - name: Build s9pk (${{ matrix.arch }})
+        env:
+          DEV_KEY: ${{ secrets.DEV_KEY }}
+        run: |
+          npm ci
+          npm run check
+          if [ -n "$DEV_KEY" ]; then
+            mkdir -p "$HOME/.startos"
+            printf '%s' "$DEV_KEY" > "$HOME/.startos/developer.key.pem"
+          else
+            start-cli init-key
+          fi
+          make arch/${{ matrix.arch }}
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: frigate_${{ matrix.arch }}.s9pk
+          path: frigate_${{ matrix.arch }}.s9pk
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: frigate_*
+          merge-multiple: true
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            frigate_x86_64.s9pk
+            frigate_aarch64.s9pk
+          generate_release_notes: true
