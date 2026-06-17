@@ -11,7 +11,7 @@ The service uses the **native StartOS dashboard** (Status, Health Checks, Servic
 
 ## Sideload install
 
-1. Download from [GitHub Release v1.6.0](https://github.com/criptoworld8484/sparrow-frigate-startos/releases/tag/v1.6.0):
+1. Download from [GitHub Release v1.6.0-3](https://github.com/criptoworld8484/sparrow-frigate-startos/releases/tag/v1.6.0-3):
    - `frigate_x86_64.s9pk` — servidores x86_64
    - `frigate_aarch64.s9pk` — ARM (Raspberry Pi, etc.)
 2. StartOS → **Sideload** → sube el `.s9pk`.
