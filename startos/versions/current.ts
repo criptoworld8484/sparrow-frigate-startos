@@ -1,12 +1,10 @@
 import { IMPOSSIBLE, VersionInfo } from '@start9labs/start-sdk'
 
 export const current = VersionInfo.of({
-  version: '1.6.0:1',
+  version: '1.6.0:2',
   releaseNotes: {
-    en_US:
-      'Initial StartOS package. Mainnet Silent Payments Electrum server for Sparrow.',
-    es_ES:
-      'Paquete inicial StartOS. Servidor Electrum Silent Payments mainnet para Sparrow.',
+    en_US: 'Use official Frigate icon (PNG) for StartOS UI.',
+    es_ES: 'Usa el icono oficial de Frigate (PNG) en la UI de StartOS.',
   },
   migrations: {
     up: async () => {},
